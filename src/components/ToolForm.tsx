@@ -1,12 +1,17 @@
 import type { Tool } from "interfaces"
-import { Button } from "components"
+import { Button, Field } from "components"
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline"
+import { useForm, Controller } from "react-hook-form"
 
 interface ToolFormProps {
   tool: Tool
 }
 
 export const ToolForm = ({ tool }: ToolFormProps) => {
+  const { control, handleSubmit } = useForm()
+
+  const onSubmit = (data: unknown) => console.log("Form data: ", data)
+
   return (
     <div className="p-6 align-bottom bg-white md:rounded-md text-left overflow-hidden transform transition sm:align-middle shadow-md md:mb-8">
       <div className="mb-4 flex items-center">
@@ -21,7 +26,22 @@ export const ToolForm = ({ tool }: ToolFormProps) => {
           <p className="text-sm text-gray-500">Write details about your code below</p>
         </div>
       </div>
-      <Button>Perform request</Button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {tool.fields.map(toolField => {
+          return (
+            <Controller
+              key={toolField.name}
+              name={toolField.name}
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Field {...toolField} value={field.value} onChange={field.onChange} />
+              )}
+            />
+          )
+        })}
+        <Button type="submit">Perform request</Button>
+      </form>
     </div>
   )
 }

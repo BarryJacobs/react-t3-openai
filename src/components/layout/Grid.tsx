@@ -5,7 +5,5 @@ interface GridProps {
 }
 
 export const Grid = ({ children }: GridProps) => {
-  return (
-    <div className="grid grid-cols-1 gap-8 mt-4 lg:grid-cols-2 xl:grid-cols-3 ">{children}</div>
-  )
+  return <div className="grid grid-cols-1 gap-8 mt-4 lg:grid-cols-2">{children}</div>
 }

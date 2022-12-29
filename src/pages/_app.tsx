@@ -1,7 +1,7 @@
+import { useEffect } from "react"
 import { type AppType } from "next/app"
 import { trpc } from "utils/trpc"
 
-import { useEffect } from "react"
 import "styles/globals.css"
 
 const MyApp: AppType = ({ Component, pageProps }) => {

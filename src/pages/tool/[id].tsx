@@ -1,4 +1,4 @@
-import { ToolHeader, ToolForm, Container, Grid, Column } from "components"
+import { ToolHeader, ToolForm, ToolOutput, Container, Grid, Column } from "components"
 import { example } from "data"
 
 const Tool = () => {
@@ -10,7 +10,9 @@ const Tool = () => {
           <Column span="6">
             <ToolForm tool={example} />
           </Column>
-          <Column span="6">world</Column>
+          <Column span="6">
+            <ToolOutput loading={false} tool={example} />
+          </Column>
         </Grid>
       </Container>
     </>
