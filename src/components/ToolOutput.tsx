@@ -1,6 +1,9 @@
 import { Loader } from "components"
 import type { Tool } from "interfaces"
-import { Bars3BottomLeftIcon } from "@heroicons/react/24/solid"
+import { Bars3BottomLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+import Typist from "react-typist-component"
+
+const outputs = ["Hello World", "Hello World", "Hello World", "Hello World"]
 
 interface ToolOutputProps {
   loading: boolean
@@ -11,7 +14,7 @@ export const ToolOutput = ({ loading, tool }: ToolOutputProps) => {
   return (
     <div className="relative mb-12">
       <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform md:skew-y-0 md:-rotate-3 md:rounded-3xl -mt-1 md:mt-0" />
-      <div className="align-bottom bg-white md:rounded-3xl text-left sm:align-middle transform transition shadow-md">
+      <div className="pb-4 align-bottom bg-white md:rounded-3xl text-left sm:align-middle transform transition shadow-md">
         <div className="px-6 py-6">
           <div className="sm:flex sm:items-start">
             {loading ? (
@@ -27,6 +30,19 @@ export const ToolOutput = ({ loading, tool }: ToolOutputProps) => {
             </div>
           </div>
         </div>
+        <Typist typingDelay={25}>
+          {outputs.map((output, index) => (
+            <div key={index} className="divide-y-1 divide-dashed divide-gray-300">
+              <div className="px-7 pb-3 flex items-start">
+                <div className="mr-4 flex-shrink-0 inline-flex items-center justify-center text-sm h-6 w-6 rounded-full bg-gray-200 text-gray-600">
+                  <ChevronRightIcon className="h-4 w-4 text-gray-600" aria-hidden="true" />
+                </div>
+                <div>{output}</div>
+              </div>
+              {index < outputs.length - 1 && <hr className="mx-7 mb-3" />}
+            </div>
+          ))}
+        </Typist>
       </div>
     </div>
   )
