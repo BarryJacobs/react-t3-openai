@@ -2,6 +2,7 @@ import type { Tool } from "interfaces"
 import { Button, Field } from "components"
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline"
 import { useForm, Controller } from "react-hook-form"
+import { openai } from "utils/openai"
 
 interface ToolFormProps {
   tool: Tool
@@ -10,7 +11,83 @@ interface ToolFormProps {
 export const ToolForm = ({ tool }: ToolFormProps) => {
   const { control, handleSubmit } = useForm()
 
-  const onSubmit = (data: unknown) => console.log("Form data: ", data)
+  const onSubmit = async (data: unknown) => {
+    const prompt = `# prompt: Interpret javascript code blocks and explain what they do in simple helpful terms
+      # code:
+      function bblSort(arr){
+        for(var i = 0; i < arr.length; i++){
+          for(var j = 0; j < ( arr.length - i -1 ); j++){
+           if(arr[j] > arr[j+1]){
+            var temp = arr[j]
+            arr[j] = arr[j + 1]
+            arr[j+1] = temp
+          }
+        }
+      }
+      console.log(arr);
+      }
+      # explanation of what the code does\n1.`
+
+    console.log("Form data: ", data)
+    try {
+      const completion = await openai.createCompletion({
+        model: "code-davinci-002",
+        max_tokens: 300,
+        temperature: 0.5,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        best_of: 1,
+        stream: false,
+        prompt: prompt,
+        stop: ["# prompt", "# code", "# explanation", "<|endoftext|>"]
+      })
+      // console.log("completion: ", completion)
+      if (completion.data && completion.data.choices && completion.data.choices[0]) {
+        const data = completion.data.choices[0]
+        let outputs: string[] = []
+
+        if (completion.data.choices[0].text) {
+          // Split break lines
+          outputs = `1.${data.text}`.split("\n")
+
+          // remove entries with spaces or empty
+          outputs = outputs.filter(function (output) {
+            return !(output === "" || output === " " || output === "\n")
+          })
+
+          if (outputs) {
+            for (let i = 0; i < outputs.length; i++) {
+              if (outputs[i]) {
+                const test = outputs[i]
+                if (test) {
+                  outputs[i] = test.trim()
+                }
+              }
+            }
+          }
+
+          // // remove numbers and spaces
+          // if (outputs) {
+          //   for (let i = 0; i < outputs.length; i++) {
+          //     if (outputs[i]) {
+          //       const test = outputs[i]
+          //       if (test) {
+          //         outputs[i] = test.substring(3)
+          //         outputs[i] = test.replace(/^\s+|\s+$/g, "")
+          //       }
+          //     }
+          //   }
+          // }
+          // // remove duplicates
+          // outputs = outputs.filter((item, pos, self) => self.indexOf(item) === pos)
+        }
+        console.log("outputs: ", outputs)
+      }
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
 
   return (
     <div className="p-6 align-bottom bg-white md:rounded-md text-left overflow-hidden transform transition sm:align-middle shadow-md md:mb-8">

@@ -6,12 +6,44 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Example {
+model Category {
   id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  name      String   @db.VarChar(50)
+  tools     Tool[]
+}
+
+model Tool {
+  id          String    @id @default(cuid())
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String
+  title       String    @db.VarChar(50)
+  description String    @db.VarChar(255)
+  prompt      String
+  fields      Field[]
+  output      Output?
+}
+
+model Output {
+  id          String  @id @default(cuid())
+  tool        Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  toolId      String  @unique
+  title       String  @db.VarChar(50)
+  description String  @db.VarChar(255)
+  usePrompt   Boolean
+}
+
+model Field {
+  id          String  @id @default(cuid())
+  tool        Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  toolId      String
+  order       Int
+  type        String  @db.VarChar(20)
+  name        String  @db.VarChar(50)
+  label       String  @db.VarChar(50)
+  placeholder String  @db.VarChar(100)
+  hint        String  @db.VarChar(100)
 }
