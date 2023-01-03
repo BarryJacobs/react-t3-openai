@@ -1,8 +1,10 @@
 import { type NextPage } from "next"
+import { trpc } from "utils/trpc"
 import { Container, Title, Grid, Header, ToolLink } from "components"
 import Head from "next/head"
 
 const Home: NextPage = () => {
+  const { data } = trpc.tool.getAll.useQuery()
   return (
     <>
       <Head>
@@ -14,12 +16,18 @@ const Home: NextPage = () => {
       <Container className="px-4 py-4 md:px-28 md:py-8 lg:py-12 ">
         <Title title="Programming" />
         <Grid>
-          <ToolLink
-            id="abcde12345"
-            group="Programming"
-            title="Explain code"
-            description="Interpret some code based on the language, code and syntax provided"
-          />
+          {data &&
+            data.map(tool => {
+              return (
+                <ToolLink
+                  key={tool.id}
+                  id={tool.id}
+                  group={tool.category.name}
+                  title={tool.title}
+                  description={tool.description}
+                />
+              )
+            })}
         </Grid>
       </Container>
     </>

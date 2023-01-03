@@ -1,9 +1,11 @@
-import { router } from "../trpc";
-import { exampleRouter } from "./example";
+import { router } from "../trpc"
+import { toolRouter } from "./tool"
+import { openaiRouter } from "./openai"
 
 export const appRouter = router({
-  example: exampleRouter,
-});
+  tool: toolRouter,
+  openai: openaiRouter
+})
 
 // export type definition of API
-export type AppRouter = typeof appRouter;
+export type AppRouter = typeof appRouter

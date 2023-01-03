@@ -22,9 +22,24 @@ model Tool {
   categoryId  String
   title       String    @db.VarChar(50)
   description String    @db.VarChar(255)
-  prompt      String
   fields      Field[]
   output      Output?
+  config      Configuration?
+}
+
+model Configuration {
+  id                String  @id @default(cuid())
+  tool              Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  toolId            String  @unique
+  model             String  @db.VarChar(50)
+  prompt            String
+  resultPrefix      String
+  maxTokens         Int
+  temperature       Float
+  topP              Float
+  frequencyPenalty  Float
+  presencePenalty   Float
+  stopSequences     String[]
 }
 
 model Output {

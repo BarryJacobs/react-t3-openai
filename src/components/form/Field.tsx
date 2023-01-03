@@ -1,10 +1,9 @@
 import { useState } from "react"
-import type { FieldType } from "interfaces"
 import { CodeEditor } from "components"
 import { DebounceInput } from "react-debounce-input"
 
 interface FieldProps {
-  type: FieldType
+  type: string
   name: string
   label: string
   onChange: (...event: any[]) => void
