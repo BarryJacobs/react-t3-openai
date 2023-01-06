@@ -1,13 +1,15 @@
 import { useState } from "react"
 import { CodeEditor } from "components"
 import { DebounceInput } from "react-debounce-input"
+import TextareaAutosize from "react-textarea-autosize"
 
 interface FieldProps {
   type: string
   name: string
   label: string
   onChange: (...event: any[]) => void
-  hint?: string
+  hint: string
+  placeholder: string
   value?: string
 }
 
@@ -38,7 +40,7 @@ export const Field = ({ type, name, label, hint, ...props }: FieldProps) => {
         return (
           <>
             {renderLabel(name, label)}
-            <textarea
+            <TextareaAutosize
               className="outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border focus:border-gray-400 border-gray-300 font-regular mt-1 transition-all"
               {...props}
             />
@@ -49,7 +51,7 @@ export const Field = ({ type, name, label, hint, ...props }: FieldProps) => {
           <>
             {renderLabel("language", "Language")}
             <DebounceInput
-              debounceTimeout={500}
+              debounceTimeout={300}
               value={language}
               onChange={event => setLanguage(event.target.value)}
               placeholder="e.g.: javascript"

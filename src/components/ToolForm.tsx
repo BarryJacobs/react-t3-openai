@@ -5,10 +5,11 @@ import { useForm, Controller } from "react-hook-form"
 
 interface ToolFormProps {
   tool: Tool
+  completionInProgress: boolean
   onSubmit: (formData: Record<string, string>) => void
 }
 
-export const ToolForm = ({ tool, onSubmit }: ToolFormProps) => {
+export const ToolForm = ({ tool, completionInProgress, onSubmit }: ToolFormProps) => {
   const { control, handleSubmit } = useForm()
 
   if (!tool) return null
@@ -22,8 +23,8 @@ export const ToolForm = ({ tool, onSubmit }: ToolFormProps) => {
           />
         </div>
         <div className="mt-0 ml-4 text-left">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Interpret code</h3>
-          <p className="text-sm text-gray-500">Write details about your code below</p>
+          <h3 className="text-lg leading-6 font-medium text-gray-900">{tool.heading}</h3>
+          <p className="text-sm text-gray-500">{tool.summary}</p>
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -40,7 +41,9 @@ export const ToolForm = ({ tool, onSubmit }: ToolFormProps) => {
             />
           )
         })}
-        <Button type="submit">Perform request</Button>
+        <Button disabled={completionInProgress} type="submit">
+          Perform request
+        </Button>
       </form>
     </div>
   )

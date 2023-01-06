@@ -13,29 +13,50 @@ export const openaiRouter = router({
     )
     .query(async ({ ctx, input }) => {
       let outputs: string[] = []
-      const config = await ctx.prisma.configuration.findUnique({
+      const tool = await ctx.prisma.tool.findUnique({
         where: {
-          toolId: input.id
+          id: input.id
+        },
+        include: {
+          config: {
+            select: {
+              model: true,
+              prompt: true,
+              resultPrefix: true,
+              maxTokens: true,
+              temperature: true,
+              topP: true,
+              frequencyPenalty: true,
+              presencePenalty: true,
+              stopSequences: true
+            }
+          },
+          output: {
+            select: {
+              usePrompt: true
+            }
+          }
         }
       })
-      if (config) {
+
+      if (tool && tool.config && tool.output) {
         const completion = await openai.createCompletion({
-          model: config.model,
-          prompt: interpolate(input.params, config.prompt),
-          max_tokens: config.maxTokens,
-          temperature: config.temperature,
-          top_p: config.topP,
-          frequency_penalty: config.frequencyPenalty,
-          presence_penalty: config.presencePenalty,
+          model: tool.config.model,
+          prompt: interpolate(input.params, tool.config.prompt),
+          max_tokens: tool.config.maxTokens,
+          temperature: tool.config.temperature,
+          top_p: tool.config.topP,
+          frequency_penalty: tool.config.frequencyPenalty,
+          presence_penalty: tool.config.presencePenalty,
           best_of: 1,
           stream: false,
-          stop: config.stopSequences
+          stop: tool.config.stopSequences.length > 0 ? tool.config.stopSequences : null
         })
 
         if (completion.data && completion.data.choices) {
-          const data = completion.data.choices[0]
-          if (data) {
-            outputs = `${config.resultPrefix}${data.text}`
+          const response = completion.data.choices[0]
+          if (response && response.text) {
+            outputs = `${tool.config.resultPrefix}${response.text}`
               .split("\n")
               .map(s => s.trim())
               .filter(s => s !== "")

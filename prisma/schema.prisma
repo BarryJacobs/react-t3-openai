@@ -22,6 +22,8 @@ model Tool {
   categoryId  String
   title       String    @db.VarChar(50)
   description String    @db.VarChar(255)
+  heading     String    @db.VarChar(50)
+  summary     String    @db.VarChar(255)
   fields      Field[]
   output      Output?
   config      Configuration?

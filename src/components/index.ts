@@ -3,6 +3,9 @@ import { Column } from "./layout/Column"
 import { Grid } from "./layout/Grid"
 import { Header } from "./layout/Header"
 import { Logo } from "./layout/Logo"
+import { Divider } from "./layout/Divider"
+import { Menu } from "./layout/Menu"
+import { MenuItem } from "./layout/MenuItem"
 
 import { Button } from "./form/Button"
 import { CodeEditor } from "./form/CodeEditor"
@@ -29,5 +32,8 @@ export {
   ToolHeader,
   ToolLink,
   ToolOutput,
-  Logo
+  Logo,
+  Divider,
+  Menu,
+  MenuItem
 }

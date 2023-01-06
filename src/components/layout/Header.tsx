@@ -24,9 +24,6 @@ export const Header = () => {
           </div>
         </div>
       </Container>
-      <div className="border-b border-gray-300 bg-white shadow-sm">
-        <div className="container flex mx-auto px-4 md:px-28 select-none"></div>
-      </div>
     </div>
   )
 }

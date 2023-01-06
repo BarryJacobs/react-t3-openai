@@ -4,8 +4,8 @@ import { Bars3BottomLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid
 import Typist from "react-typist-component"
 
 interface ToolOutputProps {
-  loading: boolean
   tool: Tool
+  loading: boolean
   outputs: string[] | undefined
 }
 
@@ -30,17 +30,21 @@ export const ToolOutput = ({ loading, tool, outputs }: ToolOutputProps) => {
             </div>
           </div>
         </div>
-        {outputs && (
-          <Typist typingDelay={20}>
+        {outputs && !loading && (
+          <Typist typingDelay={10}>
             {outputs.map((output, index) => (
               <div key={index} className="divide-y-1 divide-dashed divide-gray-300">
                 <div className="px-7 pb-3 flex items-start">
-                  <div className="mr-4 flex-shrink-0 inline-flex items-center justify-center text-sm h-6 w-6 rounded-full bg-gray-200 text-gray-600">
-                    <ChevronRightIcon className="h-4 w-4 text-gray-600" aria-hidden="true" />
-                  </div>
+                  {tool.output?.usePrompt && (
+                    <div className="mr-4 flex-shrink-0 inline-flex items-center justify-center text-sm h-6 w-6 rounded-full bg-gray-200 text-gray-600">
+                      <ChevronRightIcon className="h-4 w-4 text-gray-600" aria-hidden="true" />
+                    </div>
+                  )}
                   <div>{output}</div>
                 </div>
-                {index < outputs.length - 1 && <hr className="mx-7 mb-3" />}
+                {index < outputs.length - 1 && tool.output?.usePrompt && (
+                  <hr className="mx-7 mb-3" />
+                )}
               </div>
             ))}
           </Typist>

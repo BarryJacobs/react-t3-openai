@@ -5,6 +5,7 @@ import { ToolHeader, ToolForm, ToolOutput, Container, Grid, Column } from "compo
 
 const Tool = () => {
   const router = useRouter()
+  const utils = trpc.useContext()
   const { id } = router.query
 
   const [requestParams, setRequestParams] = useState<Record<string, string>>({})
@@ -13,13 +14,23 @@ const Tool = () => {
   const { data: outputs, isFetching } = trpc.openai.completion.useQuery(
     { id: id as string, params: requestParams },
     {
-      enabled: id !== undefined && Object.keys(requestParams).length > 0
+      enabled: id !== undefined && Object.keys(requestParams).length > 0,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount: false,
+      retry: false,
+      staleTime: Infinity,
+      cacheTime: 0
     }
   )
 
-  const onSubmit = useCallback((formData: Record<string, string>) => {
-    setRequestParams(formData)
-  }, [])
+  const onSubmit = useCallback(
+    (formData: Record<string, string>) => {
+      utils.invalidate()
+      setRequestParams(formData)
+    },
+    [utils]
+  )
 
   return tool ? (
     <>
@@ -27,10 +38,10 @@ const Tool = () => {
       <Container>
         <Grid>
           <Column span="6">
-            <ToolForm tool={tool} onSubmit={onSubmit} />
+            <ToolForm tool={tool} completionInProgress={isFetching} onSubmit={onSubmit} />
           </Column>
           <Column span="6">
-            <ToolOutput loading={isFetching} tool={tool} outputs={outputs} />
+            <ToolOutput tool={tool} loading={isFetching} outputs={outputs} />
           </Column>
         </Grid>
       </Container>
