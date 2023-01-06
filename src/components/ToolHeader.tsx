@@ -1,5 +1,5 @@
 import type { Tool } from "types"
-import { Logo, Menu } from "components"
+import { Menu } from "components"
 
 interface ToolHeaderProps {
   tool: Tool
