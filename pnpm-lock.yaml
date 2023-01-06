@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@heroicons/react': ^2.0.13
   '@monaco-editor/react': ^4.4.6
-  '@prisma/client': ^4.5.0
+  '@prisma/client': ^4.8.1
   '@tanstack/react-query': ^4.16.0
   '@trpc/client': ^10.0.0
   '@trpc/next': ^10.0.0
@@ -39,7 +39,7 @@ specifiers:
 dependencies:
   '@heroicons/react': 2.0.13_react@18.2.0
   '@monaco-editor/react': 4.4.6_6vrjaj6ridxbohi43n7zt4gn7q
-  '@prisma/client': 4.8.0_prisma@4.8.1
+  '@prisma/client': 4.8.1_prisma@4.8.1
   '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
   '@trpc/client': 10.7.0_@trpc+server@10.7.0
   '@trpc/next': 10.7.0_2oh7zi2rok7ahhg53vlqwnheia
@@ -306,8 +306,8 @@ packages:
       fastq: 1.14.0
     dev: true
 
-  /@prisma/client/4.8.0_prisma@4.8.1:
-    resolution: {integrity: sha512-Y1riB0p2W52kh3zgssP/YAhln3RjBFcJy3uwEiyjmU+TQYh6QTZDRFBo3JtBWuq2FyMOl1Rye8jxzUP+n0l5Cg==}
+  /@prisma/client/4.8.1_prisma@4.8.1:
+    resolution: {integrity: sha512-d4xhZhETmeXK/yZ7K0KcVOzEfI5YKGGEr4F5SBV04/MU4ncN/HcE28sy3e4Yt8UFW0ZuImKFQJE+9rWt9WbGSQ==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
