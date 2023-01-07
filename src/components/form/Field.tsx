@@ -46,7 +46,7 @@ export const Field = ({ type, name, label, hint, ...props }: FieldProps) => {
         return (
           <>
             {renderLabel(name, label)}
-            <div className="mt-1">
+            <div className="mt-1 w-full">
               <CodeEditor {...props} />
             </div>
           </>

@@ -22,13 +22,14 @@ specifiers:
   postcss: ^8.4.14
   prettier: ^2.7.1
   prettier-plugin-tailwindcss: ^0.1.13
+  prism-react-renderer: ^1.3.5
   prisma: ^4.8.1
-  prismjs: ^1.29.0
   react: 18.2.0
   react-ace: ^10.1.0
   react-debounce-input: ^3.3.0
   react-dom: 18.2.0
   react-hook-form: ^7.41.1
+  react-simple-code-editor: ^0.13.1
   react-textarea-autosize: ^8.4.0
   react-typist-component: ^1.0.5
   superjson: 1.9.1
@@ -47,12 +48,13 @@ dependencies:
   '@trpc/server': 10.7.0
   next: 13.0.2_biqbaboplfbrettd7655fr4n2y
   openai: 3.1.0
-  prismjs: 1.29.0
+  prism-react-renderer: 1.3.5_react@18.2.0
   react: 18.2.0
   react-ace: 10.1.0_biqbaboplfbrettd7655fr4n2y
   react-debounce-input: 3.3.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.41.1_react@18.2.0
+  react-simple-code-editor: 0.13.1_biqbaboplfbrettd7655fr4n2y
   react-textarea-autosize: 8.4.0_kzbn2opkn2327fwg5yzwzya5o4
   react-typist-component: 1.0.5_react@18.2.0
   superjson: 1.9.1
@@ -2160,6 +2162,14 @@ packages:
     hasBin: true
     dev: true
 
+  /prism-react-renderer/1.3.5_react@18.2.0:
+    resolution: {integrity: sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==}
+    peerDependencies:
+      react: '>=0.14.9'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /prisma/4.8.1:
     resolution: {integrity: sha512-ZMLnSjwulIeYfaU1O6/LF6PEJzxN5par5weykxMykS9Z6ara/j76JH3Yo2AH3bgJbPN4Z6NeCK9s5fDkzf33cg==}
     engines: {node: '>=14.17'}
@@ -2167,11 +2177,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 4.8.1
-
-  /prismjs/1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-    dev: false
 
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -2240,6 +2245,16 @@ packages:
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-simple-code-editor/0.13.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-XYeVwRZwgyKtjNIYcAEgg2FaQcCZwhbarnkJIV20U2wkCU9q/CPFBo8nRXrK4GXUz3AvbqZFsZRrpUTkqqEYyQ==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /react-ssr-prepass/1.5.0_react@18.2.0:
     resolution: {integrity: sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==}

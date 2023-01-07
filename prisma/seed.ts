@@ -27,9 +27,9 @@ const run = async () => {
             },
             output: {
               create: {
+                type: "prompt",
                 title: "What does this code do?",
-                description: "The following code does:",
-                usePrompt: true
+                description: "The following code does:"
               }
             },
             config: {
@@ -41,9 +41,55 @@ const run = async () => {
                 maxTokens: 500,
                 temperature: 0.5,
                 topP: 1,
+                frequencyPenalty: 1,
+                presencePenalty: 0,
+                stopSequences: ["# prompt", "# author", "# end", "```"]
+              }
+            }
+          },
+          {
+            title: "Write code",
+            description: "Write some code based on the language and functionality provided",
+            heading: "Generate code",
+            summary: "Provide details about your requirements below",
+            fields: {
+              create: [
+                {
+                  order: 1,
+                  type: "text",
+                  name: "language",
+                  label: "Language",
+                  hint: "Provide the language you wish to use",
+                  placeholder: "e.g.: javascript"
+                },
+                {
+                  order: 2,
+                  type: "textarea",
+                  name: "summary",
+                  label: "Summary",
+                  hint: "Provide details about the functionality you wish to implement",
+                  placeholder: "e.g.: perform a bubble sort"
+                }
+              ]
+            },
+            output: {
+              create: {
+                type: "code",
+                title: "Code preview",
+                description: "Example of a possible implementation:"
+              }
+            },
+            config: {
+              create: {
+                model: "code-davinci-002",
+                prompt: "# prompt: Write some code, in ${language}, to ${summary}\n# code:\n",
+                resultPrefix: "",
+                maxTokens: 500,
+                temperature: 0.5,
+                topP: 1,
                 frequencyPenalty: 0.5,
                 presencePenalty: 0,
-                stopSequences: ["# prompt", "# author", "# end"]
+                stopSequences: []
               }
             }
           }
@@ -73,9 +119,9 @@ const run = async () => {
             },
             output: {
               create: {
+                type: "prompt",
                 title: "Summarised points",
-                description: "The following key points detected:",
-                usePrompt: true
+                description: "The following key points detected:"
               }
             },
             config: {
@@ -136,9 +182,9 @@ const run = async () => {
             },
             output: {
               create: {
+                type: "text",
                 title: "Advertisment preview",
-                description: "Example of a possible job application:",
-                usePrompt: false
+                description: "Example of a possible job application:"
               }
             },
             config: {

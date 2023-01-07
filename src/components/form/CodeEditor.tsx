@@ -32,6 +32,9 @@ export const CodeEditor = ({ value, onChange }: CodeEditorProps) => {
       editorProps={{
         $blockScrolling: true
       }}
+      style={{
+        width: "100%"
+      }}
     />
   )
 }

@@ -1,5 +1,5 @@
 import type { Tool } from "types"
-import { Loader } from "components"
+import { Loader, CodeBlock } from "components"
 import { Bars3BottomLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 import Typist from "react-typist-component"
 
@@ -11,6 +11,7 @@ interface ToolOutputProps {
 
 export const ToolOutput = ({ loading, tool, outputs }: ToolOutputProps) => {
   if (!tool || !tool.output) return null
+  console.log("output: ", tool.output)
   return (
     <div className="relative mb-12">
       <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform md:skew-y-0 md:-rotate-3 md:rounded-3xl -mt-1 md:mt-0" />
@@ -35,14 +36,14 @@ export const ToolOutput = ({ loading, tool, outputs }: ToolOutputProps) => {
             {outputs.map((output, index) => (
               <div key={index} className="divide-y-1 divide-dashed divide-gray-300">
                 <div className="px-7 pb-3 flex items-start">
-                  {tool.output?.usePrompt && (
+                  {tool.output?.type === "prompt" && (
                     <div className="mr-4 flex-shrink-0 inline-flex items-center justify-center text-sm h-6 w-6 rounded-full bg-gray-200 text-gray-600">
                       <ChevronRightIcon className="h-4 w-4 text-gray-600" aria-hidden="true" />
                     </div>
                   )}
-                  <div>{output}</div>
+                  {tool.output?.type === "code" ? <CodeBlock code={output} /> : <div>{output}</div>}
                 </div>
-                {index < outputs.length - 1 && tool.output?.usePrompt && (
+                {index < outputs.length - 1 && tool.output?.type === "prompt" && (
                   <hr className="mx-7 mb-3" />
                 )}
               </div>

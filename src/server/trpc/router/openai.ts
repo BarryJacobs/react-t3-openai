@@ -33,7 +33,7 @@ export const openaiRouter = router({
           },
           output: {
             select: {
-              usePrompt: true
+              type: true
             }
           }
         }
@@ -56,10 +56,13 @@ export const openaiRouter = router({
         if (completion.data && completion.data.choices) {
           const response = completion.data.choices[0]
           if (response && response.text) {
-            outputs = `${tool.config.resultPrefix}${response.text}`
-              .split("\n")
-              .map(s => s.trim())
-              .filter(s => s !== "")
+            if (tool.output.type === "code") outputs.push(response.text.trim())
+            else {
+              outputs = `${tool.config.resultPrefix}${response.text}`
+                .split("\n")
+                .map(s => s.trim())
+                .filter(s => s !== "")
+            }
           }
         }
       }

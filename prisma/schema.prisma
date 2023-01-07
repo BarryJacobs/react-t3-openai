@@ -48,9 +48,9 @@ model Output {
   id          String  @id @default(cuid())
   tool        Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
   toolId      String  @unique
+  type        String  @db.VarChar(20)
   title       String  @db.VarChar(50)
   description String  @db.VarChar(255)
-  usePrompt   Boolean
 }
 
 model Field {

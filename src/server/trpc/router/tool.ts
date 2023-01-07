@@ -44,9 +44,9 @@ export const toolRouter = router({
           },
           output: {
             select: {
+              type: true,
               title: true,
-              description: true,
-              usePrompt: true
+              description: true
             }
           }
         }
