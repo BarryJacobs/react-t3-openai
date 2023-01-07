@@ -11,7 +11,6 @@ interface ToolOutputProps {
 
 export const ToolOutput = ({ loading, tool, outputs }: ToolOutputProps) => {
   if (!tool || !tool.output) return null
-  console.log("output: ", tool.output)
   return (
     <div className="relative mb-12">
       <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform md:skew-y-0 md:-rotate-3 md:rounded-3xl -mt-1 md:mt-0" />
