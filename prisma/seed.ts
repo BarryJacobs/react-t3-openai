@@ -81,8 +81,8 @@ const run = async () => {
             },
             config: {
               create: {
-                model: "code-davinci-002",
-                prompt: "# prompt: Write some code, in ${language}, to ${summary}\n# code:\n",
+                model: "code-cushman-001",
+                prompt: "# prompt: Write some code in ${language} that ${summary}\n# code:\n",
                 resultPrefix: "",
                 maxTokens: 500,
                 temperature: 0.5,
