@@ -81,10 +81,10 @@ const run = async () => {
             },
             config: {
               create: {
-                model: "code-cushman-001",
+                model: "code-davinci-002",
                 prompt: "# prompt: Write some code in ${language} that ${summary}\n# code:\n",
                 resultPrefix: "",
-                maxTokens: 500,
+                maxTokens: 1000,
                 temperature: 0.5,
                 topP: 1,
                 frequencyPenalty: 0.5,
@@ -104,7 +104,7 @@ const run = async () => {
             title: "Summarise points",
             description: "Analyze your text or documents and convey the important concepts",
             heading: "Text content",
-            summary: "A sentence or paragraph you wish to summarise",
+            summary: "Please provide the text that you wish to summarise",
             fields: {
               create: [
                 {
