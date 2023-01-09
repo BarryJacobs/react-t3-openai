@@ -21,7 +21,8 @@ const run = async () => {
                   name: "code",
                   label: "Code",
                   hint: "Place some code above to understand how it works",
-                  placeholder: ""
+                  placeholder: "",
+                  required: true
                 }
               ]
             },
@@ -60,7 +61,8 @@ const run = async () => {
                   name: "language",
                   label: "Language",
                   hint: "Provide the language you wish to use",
-                  placeholder: "e.g.: javascript"
+                  placeholder: "e.g.: javascript",
+                  required: true
                 },
                 {
                   order: 2,
@@ -68,7 +70,8 @@ const run = async () => {
                   name: "summary",
                   label: "Summary",
                   hint: "Provide details about the functionality you wish to implement",
-                  placeholder: "e.g.: perform a bubble sort"
+                  placeholder: "e.g.: perform a bubble sort",
+                  required: true
                 }
               ]
             },
@@ -113,7 +116,8 @@ const run = async () => {
                   name: "content",
                   label: "Content",
                   hint: "",
-                  placeholder: ""
+                  placeholder: "",
+                  required: true
                 }
               ]
             },
@@ -152,7 +156,8 @@ const run = async () => {
                   name: "title",
                   label: "Job title",
                   hint: "",
-                  placeholder: ""
+                  placeholder: "",
+                  required: true
                 },
                 {
                   order: 2,
@@ -160,7 +165,8 @@ const run = async () => {
                   name: "company",
                   label: "Company",
                   hint: "",
-                  placeholder: ""
+                  placeholder: "",
+                  required: true
                 },
                 {
                   order: 3,
@@ -168,15 +174,17 @@ const run = async () => {
                   name: "skills",
                   label: "Skills or experience",
                   hint: "List the skills and experience required for the job",
-                  placeholder: ""
+                  placeholder: "",
+                  required: true
                 },
                 {
                   order: 4,
                   type: "text",
                   name: "contact",
-                  label: "Contact information",
+                  label: "Contact information (Optional)",
                   hint: "Provide an email address or phone number",
-                  placeholder: ""
+                  placeholder: "",
+                  required: false
                 }
               ]
             },

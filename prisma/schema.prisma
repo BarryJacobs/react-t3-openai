@@ -63,4 +63,5 @@ model Field {
   label       String  @db.VarChar(50)
   placeholder String  @db.VarChar(100)
   hint        String  @db.VarChar(100)
+  required    Boolean
 }
