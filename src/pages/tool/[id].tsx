@@ -26,9 +26,7 @@ const Tool = () => {
 
   const onSubmit = useCallback(
     (formData: Record<string, string>) => {
-      utils.invalidate().catch(error => {
-        console.log(error)
-      })
+      utils.openai.completion.invalidate()
       setRequestParams(formData)
     },
     [utils]

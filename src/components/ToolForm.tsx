@@ -36,7 +36,7 @@ export const ToolForm = ({ tool, completionInProgress, onSubmit }: ToolFormProps
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <Field {...toolField} value={field.value} onChange={field.onChange} />
+                <Field {...toolField} value={field.value as string} onChange={field.onChange} />
               )}
             />
           )
