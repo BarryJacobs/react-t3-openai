@@ -7,5 +7,5 @@ interface ColumnProps {
 }
 
 export const Column = ({ span, className, children }: ColumnProps) => {
-  return <div className={`col-span-${span} ${className}`}>{children}</div>
+  return <div className={`col-span-${span} ${className ? className : ""}`}>{children}</div>
 }

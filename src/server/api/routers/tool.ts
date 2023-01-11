@@ -1,7 +1,7 @@
-import { router, publicProcedure } from "../trpc"
+import { createTRPCRouter, publicProcedure } from "../trpc"
 import { z } from "zod"
 
-export const toolRouter = router({
+export const toolRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.tool.findMany({
       include: {

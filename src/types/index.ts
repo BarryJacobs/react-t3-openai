@@ -1,4 +1,4 @@
-import type { RouterOutputs } from "utils/trpc"
+import type { RouterOutputs } from "utils/api"
 
 export type Tool = RouterOutputs["tool"]["get"]
 export type Tools = RouterOutputs["tool"]["getAll"]

@@ -1,13 +1,13 @@
 import { useMemo, useCallback, useState } from "react"
 import { type NextPage } from "next"
-import { trpc } from "utils/trpc"
+import { api } from "utils/api"
 import { Container, Title, Grid, Header, ToolLink, Divider, Menu } from "components"
 import type { Tools } from "types"
 import Head from "next/head"
 
 const Home: NextPage = () => {
   const [tools, setTools] = useState<Tools | undefined>(undefined)
-  const { data } = trpc.tool.getAll.useQuery(undefined, {
+  const { data } = api.tool.getAll.useQuery(undefined, {
     onSuccess(data) {
       setTools(data)
     }
