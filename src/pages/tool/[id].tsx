@@ -1,17 +1,17 @@
 import { useState, useCallback } from "react"
 import { useRouter } from "next/router"
-import { trpc } from "utils/trpc"
+import { api } from "utils/api"
 import { ToolHeader, ToolForm, ToolOutput, Container, Grid, Column } from "components"
 
 const Tool = () => {
   const router = useRouter()
-  const utils = trpc.useContext()
+  const utils = api.useContext()
   const { id } = router.query
 
   const [requestParams, setRequestParams] = useState<Record<string, string>>({})
 
-  const { data: tool } = trpc.tool.get.useQuery({ id: id as string }, { enabled: id !== undefined })
-  const { data: outputs, isFetching } = trpc.openai.completion.useQuery(
+  const { data: tool } = api.tool.get.useQuery({ id: id as string }, { enabled: id !== undefined })
+  const { data: outputs, isFetching } = api.openai.completion.useQuery(
     { id: id as string, params: requestParams },
     {
       enabled: id !== undefined && Object.keys(requestParams).length > 0,
@@ -26,7 +26,9 @@ const Tool = () => {
 
   const onSubmit = useCallback(
     (formData: Record<string, string>) => {
-      utils.invalidate()
+      utils.invalidate().catch(error => {
+        console.log(error)
+      })
       setRequestParams(formData)
     },
     [utils]

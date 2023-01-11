@@ -1,9 +1,9 @@
-import { router, publicProcedure } from "../trpc"
+import { createTRPCRouter, publicProcedure } from "../trpc"
 import { interpolate } from "utils"
 import { openai } from "utils/openai"
 import { record, z } from "zod"
 
-export const openaiRouter = router({
+export const openaiRouter = createTRPCRouter({
   completion: publicProcedure
     .input(
       z.object({
