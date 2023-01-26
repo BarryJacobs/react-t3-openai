@@ -8,6 +8,7 @@ interface FieldProps {
   onChange: (...event: any[]) => void
   hint: string
   placeholder: string
+  error?: string
   value?: string
 }
 
@@ -19,15 +20,16 @@ const renderLabel = (fieldName: string, labelText: string) => {
   )
 }
 
-export const Field = ({ type, name, label, hint, ...props }: FieldProps) => {
+export const Field = ({ type, name, label, hint, error, ...props }: FieldProps) => {
   const renderField = () => {
+    const borderColor = error ? "red" : "gray"
     switch (type) {
       case "text":
         return (
           <>
             {renderLabel(name, label)}
             <input
-              className="outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border focus:border-gray-400 border-gray-300 font-regular mt-1 transition-all"
+              className={`outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border focus:border-${borderColor}-400 border-${borderColor}-300 font-regular mt-1 transition-all`}
               {...props}
             />
           </>
@@ -37,7 +39,7 @@ export const Field = ({ type, name, label, hint, ...props }: FieldProps) => {
           <>
             {renderLabel(name, label)}
             <TextareaAutosize
-              className="outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border focus:border-gray-400 border-gray-300 font-regular mt-1 transition-all"
+              className={`outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border focus:border-${borderColor}-400 border-${borderColor}-300 font-regular mt-1 transition-all`}
               {...props}
             />
           </>
@@ -59,13 +61,14 @@ export const Field = ({ type, name, label, hint, ...props }: FieldProps) => {
   return (
     <div className="mt-4">
       {renderField()}
-      {hint && (
-        <div
-          className={`text-gray-400 text-xs transition-all line mt-${
-            type === "textarea" ? "0" : "1"
-          }`}>
-          {hint}
-        </div>
+      {error ? (
+        <div className={`text-xs text-red-600 mt-${type === "textarea" ? "0" : "1"}`}>{error}</div>
+      ) : (
+        hint && (
+          <div className={`text-xs text-gray-400 mt-${type === "textarea" ? "0" : "1"}`}>
+            {hint}
+          </div>
+        )
       )}
     </div>
   )

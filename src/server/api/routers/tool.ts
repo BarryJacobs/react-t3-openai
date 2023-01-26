@@ -36,7 +36,8 @@ export const toolRouter = createTRPCRouter({
               name: true,
               label: true,
               placeholder: true,
-              hint: true
+              hint: true,
+              required: true
             },
             orderBy: {
               order: "asc"
