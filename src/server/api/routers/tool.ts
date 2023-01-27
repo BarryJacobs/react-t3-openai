@@ -37,7 +37,14 @@ export const toolRouter = createTRPCRouter({
               label: true,
               placeholder: true,
               hint: true,
-              required: true
+              validationRules: {
+                select: {
+                  type: true,
+                  message: true,
+                  primary: true,
+                  secondary: true
+                }
+              }
             },
             orderBy: {
               order: "asc"

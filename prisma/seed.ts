@@ -22,7 +22,13 @@ const run = async () => {
                   label: "Code",
                   hint: "Place some code above to understand how it works",
                   placeholder: "",
-                  required: true
+                  validationRules: {
+                    create: [
+                      {
+                        type: "required"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -62,7 +68,13 @@ const run = async () => {
                   label: "Language",
                   hint: "Provide the language you wish to use",
                   placeholder: "e.g.: javascript",
-                  required: true
+                  validationRules: {
+                    create: [
+                      {
+                        type: "required"
+                      }
+                    ]
+                  }
                 },
                 {
                   order: 2,
@@ -71,7 +83,13 @@ const run = async () => {
                   label: "Summary",
                   hint: "Provide details about the functionality you wish to implement",
                   placeholder: "e.g.: perform a bubble sort",
-                  required: true
+                  validationRules: {
+                    create: [
+                      {
+                        type: "required"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -117,7 +135,13 @@ const run = async () => {
                   label: "Content",
                   hint: "",
                   placeholder: "",
-                  required: true
+                  validationRules: {
+                    create: [
+                      {
+                        type: "required"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -157,7 +181,13 @@ const run = async () => {
                   label: "Job title",
                   hint: "",
                   placeholder: "",
-                  required: true
+                  validationRules: {
+                    create: [
+                      {
+                        type: "required"
+                      }
+                    ]
+                  }
                 },
                 {
                   order: 2,
@@ -166,7 +196,13 @@ const run = async () => {
                   label: "Company",
                   hint: "",
                   placeholder: "",
-                  required: true
+                  validationRules: {
+                    create: [
+                      {
+                        type: "required"
+                      }
+                    ]
+                  }
                 },
                 {
                   order: 3,
@@ -175,7 +211,13 @@ const run = async () => {
                   label: "Skills or experience",
                   hint: "List the skills and experience required for the job",
                   placeholder: "",
-                  required: true
+                  validationRules: {
+                    create: [
+                      {
+                        type: "required"
+                      }
+                    ]
+                  }
                 },
                 {
                   order: 4,
@@ -184,7 +226,7 @@ const run = async () => {
                   label: "Contact information (Optional)",
                   hint: "Provide an email address or phone number",
                   placeholder: "",
-                  required: false
+                  validationRules: {}
                 }
               ]
             },

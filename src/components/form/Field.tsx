@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { CodeEditor } from "components"
 import TextareaAutosize from "react-textarea-autosize"
 
@@ -21,7 +22,7 @@ const renderLabel = (fieldName: string, labelText: string) => {
 }
 
 export const Field = ({ type, name, label, hint, error, ...props }: FieldProps) => {
-  const renderField = () => {
+  const renderField = useMemo(() => {
     const borderColor = error ? "red" : "gray"
     switch (type) {
       case "text":
@@ -29,7 +30,7 @@ export const Field = ({ type, name, label, hint, error, ...props }: FieldProps) 
           <>
             {renderLabel(name, label)}
             <input
-              className={`outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border focus:border-${borderColor}-400 border-${borderColor}-300 font-regular mt-1 transition-all`}
+              className={`outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border-2 focus:border-${borderColor}-400 border-${borderColor}-300 font-regular mt-1 transition-all`}
               {...props}
             />
           </>
@@ -39,7 +40,7 @@ export const Field = ({ type, name, label, hint, error, ...props }: FieldProps) 
           <>
             {renderLabel(name, label)}
             <TextareaAutosize
-              className={`outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border focus:border-${borderColor}-400 border-${borderColor}-300 font-regular mt-1 transition-all`}
+              className={`outline-none focus:outline-none text-md bg-white rounded-md px-3 py-2 w-full border-2 focus:border-${borderColor}-400 border-${borderColor}-300 font-regular mt-1 transition-all`}
               {...props}
             />
           </>
@@ -56,11 +57,11 @@ export const Field = ({ type, name, label, hint, error, ...props }: FieldProps) 
       default:
         null
     }
-  }
+  }, [error, label, name, props, type])
 
   return (
     <div className="mt-4">
-      {renderField()}
+      {renderField}
       {error ? (
         <div className={`text-xs text-red-600 mt-${type === "textarea" ? "0" : "1"}`}>{error}</div>
       ) : (

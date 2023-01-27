@@ -54,14 +54,24 @@ model Output {
 }
 
 model Field {
-  id          String  @id @default(cuid())
-  tool        Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
-  toolId      String
-  order       Int
-  type        String  @db.VarChar(20)
-  name        String  @db.VarChar(50)
-  label       String  @db.VarChar(50)
-  placeholder String  @db.VarChar(100)
-  hint        String  @db.VarChar(100)
-  required    Boolean
+  id              String  @id @default(cuid())
+  tool            Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  toolId          String
+  order           Int
+  type            String  @db.VarChar(20)
+  name            String  @db.VarChar(50)
+  label           String  @db.VarChar(50)
+  placeholder     String  @db.VarChar(100)
+  hint            String  @db.VarChar(100)
+  validationRules ValidationRule[]
+}
+
+model ValidationRule {
+  id          String    @id @default(cuid())
+  field       Field     @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  fieldId     String
+  type        String    @db.VarChar(20)
+  message     String?   @db.VarChar(100)
+  primary     String?   @db.VarChar(10)
+  secondary   String?   @db.VarChar(10)
 }

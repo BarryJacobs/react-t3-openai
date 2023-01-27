@@ -18,9 +18,16 @@ export const ToolForm = ({ tool, completionInProgress, onSubmit }: ToolFormProps
     if (tool) {
       tool.fields.forEach(toolField => {
         let schemaField = z.string()
-        if (toolField.required) {
-          schemaField = schemaField.min(1)
-        }
+        toolField.validationRules.forEach(validationRule => {
+          switch (validationRule.type) {
+            case "required":
+              schemaField = schemaField.min(1, {
+                message: validationRule.message ?? `${toolField.label} is a required field`
+              })
+              break
+            default:
+          }
+        })
         schema[toolField.name] = schemaField
       })
     }
